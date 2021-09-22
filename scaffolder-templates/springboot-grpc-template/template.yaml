@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1beta2
 kind: Template
 metadata:
-  name: springboot-template
+  name: springboot-ms-template
   title: Spring Boot Micro Service
   description: Create a simple microservice using Spring Boot Java
   tags:
