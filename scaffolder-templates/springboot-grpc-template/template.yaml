@@ -2,12 +2,11 @@ apiVersion: backstage.io/v1beta2
 kind: Template
 metadata:
   name: springboot-template
-  title: Spring Boot gRPC Service
-  description: Create a simple microservice using gRPC and Spring Boot Java
+  title: Spring Boot Micro Service
+  description: Create a simple microservice using Spring Boot Java
   tags:
     - recommended
     - java
-    - grpc
 spec:
   owner: service@example.com
   type: service
@@ -30,7 +29,10 @@ spec:
         description:
           title: Description
           type: string
-          description: Help others understand what this website is for.
+        Project Name:
+          title: Project Name
+          type: string
+          description: Help others understand what this service is for.
         owner:
           title: Owner
           type: string
@@ -39,6 +41,15 @@ spec:
           ui:options:
             allowedKinds: 
               - Group
+         service_type:
+          title: Type
+          type: string
+          description: Owner of the component
+          ui:field: TypePicker
+          ui:options:
+            allowedKinds: 
+              - Processing
+              - Experience
     - title: Choose a location  
       required:
         - repoUrl
@@ -49,7 +60,7 @@ spec:
           ui:field: RepoUrlPicker
           ui:options:
             allowedHosts:
-              - github.com
+              - gitlab.com
 
   steps:
     - id: template
