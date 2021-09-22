@@ -29,7 +29,15 @@ spec:
         description:
           title: Description
           type: string
-        Project Name:
+        category_name:
+          title: Category Name
+          type: string
+          description: digital, domain, etc ...
+        sub_category_name:
+          title: Sub Category Name
+          type: string
+          description: cards, loans, etc ...
+        project_name:
           title: Project Name
           type: string
           description: Help others understand what this service is for.
