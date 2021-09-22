@@ -33,6 +33,10 @@ spec:
           title: Category Name
           type: string
           description: digital, domain, etc ...
+        gitlab_pid:
+          title: Gitlab ProjectId
+          type: string
+          description: options to trace requests and pipelines
         sub_category_name:
           title: Sub Category Name
           type: string
