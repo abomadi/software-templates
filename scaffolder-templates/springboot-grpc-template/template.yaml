@@ -1,71 +1,18 @@
 apiVersion: backstage.io/v1beta2
 kind: Template
 metadata:
-  name: springboot-ms-template
-  title: Spring Boot Micro Service
-  description: Create a simple microservice using Spring Boot Java
-  tags:
-    - recommended
-    - java
+  name: gitlab-demo
+  title: Test Bitbucket RepoUrlPicker template
+  description: scaffolder v1beta2 template demo publishing to bitbucket
 spec:
-  owner: service@example.com
+  owner: backstage/techdocs-core
   type: service
-  
+
   parameters:
-    - title: Provide some simple information
-      required:
-        - component_id
-        - owner
-        - java_package_name
-      properties:
-        component_id:
-          title: Name
-          type: string
-          description: Unique name of the component
-        java_package_name:
-          title: Java Package Name
-          type: string
-          description: Name for the java package. eg (io.backstage.blah)
-        description:
-          title: Description
-          type: string
-        category_name:
-          title: Category Name
-          type: string
-          description: digital, domain, etc ...
-        gitlab_pid:
-          title: Gitlab ProjectId
-          type: string
-          description: options to trace requests and pipelines
-        sub_category_name:
-          title: Sub Category Name
-          type: string
-          description: cards, loans, etc ...
-        project_name:
-          title: Project Name
-          type: string
-          description: Help others understand what this service is for.
-        owner:
-          title: Owner
-          type: string
-          description: Owner of the component
-          ui:field: OwnerPicker
-          ui:options:
-            allowedKinds: 
-              - Group
-        service_type:
-          title: Type
-          type: string
-          description: Owner of the component
-          ui:field: TypePicker
-          ui:options:
-            allowedKinds: 
-              - Processing
-              - Experience
-    - title: Choose a location  
+    - title: Choose a location
       required:
         - repoUrl
-      properties: 
+      properties:
         repoUrl:
           title: Repository Location
           type: string
@@ -73,27 +20,49 @@ spec:
           ui:options:
             allowedHosts:
               - gitlab.com
+    - title: Fill in some steps
+      required:
+        - name
+        - owner
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Unique name of the component
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds:
+              - Group
 
   steps:
-    - id: template
-      name: Fetch Skeleton + Template
+    - id: fetch-base
+      name: Fetch Base
       action: fetch:template
       input:
         url: ./skeleton
         values:
-          component_id: '{{ parameters.component_id }}'
-          description: '{{ parameters.description }}'
-          artifact_id: '{{ parameters.component_id }}'
-          java_package_name: '{{ parameters.java_package_name }}'
+          name: '{{ parameters.name }}'
           owner: '{{ parameters.owner }}'
-          destination: '{{ parseRepoUrl parameters.repoUrl }}'
-          http_port: 8080
+
+    - id: fetch-docs
+      name: Fetch Docs
+      action: fetch:plain
+      input:
+        targetPath: ./community
+        url: https://github.com/backstage/community/tree/main/backstage-community-sessions
 
     - id: publish
       name: Publish
       action: publish:gitlab
       input:
-        description: 'This is {{ parameters.component_id }}'
+        description: 'This is {{ parameters.name }}'
         repoUrl: '{{ parameters.repoUrl }}'
 
     - id: register
