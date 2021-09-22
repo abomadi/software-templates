@@ -5,6 +5,7 @@ metadata:
   description: ${{values.description | dump}}
   annotations:
     github.com/project-slug: ${{values.destination.owner + "/" + values.destination.repo}}
+    gitlab.com/micro-services: ${{values.destination.category_name + "/" + values.destination.sub_category_name}}
     backstage.io/techdocs-ref: dir:.
 spec:
   type: service
