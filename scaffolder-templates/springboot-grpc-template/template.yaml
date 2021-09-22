@@ -53,7 +53,7 @@ spec:
           ui:options:
             allowedKinds: 
               - Group
-         service_type:
+        service_type:
           title: Type
           type: string
           description: Owner of the component
