@@ -51,19 +51,14 @@ spec:
           name: '{{ parameters.name }}'
           owner: '{{ parameters.owner }}'
 
-    - id: fetch-docs
-      name: Fetch Docs
-      action: fetch:plain
-      input:
-        targetPath: ./community
-        url: https://github.com/backstage/community/tree/main/backstage-community-sessions
-
     - id: publish
       name: Publish
       action: publish:gitlab
       input:
         description: 'This is {{ parameters.name }}'
         repoUrl: '{{ parameters.repoUrl }}'
+        repoVisibility: 'public'
+        defaultBranch: 'main'
 
     - id: register
       name: Register
