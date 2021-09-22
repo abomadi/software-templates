@@ -6,6 +6,7 @@ metadata:
   annotations:
     github.com/project-slug: ${{values.destination.owner + "/" + values.destination.repo}}
     gitlab.com/micro-services: ${{values.destination.category_name + "/" + values.destination.sub_category_name}}
+    gitlab.com/project-id: ${{values.destination.gitlab_pid}}
     backstage.io/techdocs-ref: dir:.
 spec:
   type: service
